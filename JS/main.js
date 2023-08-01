@@ -125,7 +125,7 @@ function checkedInput ()
     if (flag === true)
     {
       clearFormInput ( name , emailNameIn , emailPasswordIn)
-      window.open( "index.html" );
+      window.open( "home.html" );
     }
     else
     {
@@ -157,7 +157,7 @@ function checkedInput ()
 //       alert("password in corrected")
 //     } else
 //   {
-//     window.open( "index.html" );
+//     window.open( "home.html" );
 //     clearFormLogIn ()
 
 //     // let UserNameHome = `<span> Hello : ${ arrayName[ arrayName[ arrayEmail.indexOf( emailNameIn.value ) ] ] } </span>`;
