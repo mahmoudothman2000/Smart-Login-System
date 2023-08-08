@@ -29,16 +29,11 @@
       <div class="inputForm p-4 border border-2 w-75 border-info rounded-2">
         <h1 class="text-center ">Smart Login System</h1>
         <input type="text" id="emailNameIn" placeholder="Enter Your Email Name" class="form-control my-3">
+        <p id="msgEmailIn" class="text-danger"></p>
         <input type="password" id="emailPasswordIn" placeholder="Enter Your Password" class="form-control my-3">
-        <p id="messageCorrectIn" class="d-none text-success">account</p>
-        <p id="messageIncorrectIn" class="d-none text-danger">account</p>
-        <button id="Login" onclick="checkedInput ()" class="btn btn-outline-primary w-50 m-auto d-block my-4 ">Login</button>
+        <p id="msgPassIn" class="text-danger"></p>
+        <button id="Login"  class="btn btn-outline-primary w-50 m-auto d-block my-4 ">Login</button>
         <p class="text-center">Don’t have an account?  <a href="Sign-up.html" class="linkSign" id="linkSign"> Sign Up</a></p>
-        <div  id="layer"class="layer  position-absolute top-0 bottom-0 start-0 end-0 w-100 h-100 d-flex justify-content-center align-items-center">
-          <div class="modalSignIn d-flex justify-content-center align-items-center" id="modalSignIn">
-            <p>The Email or Password May Be Incorrect</p>
-          </div>
-        </div>
       </div>
     </div>
 

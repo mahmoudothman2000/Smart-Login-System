@@ -29,17 +29,19 @@
       <div class="inputForm p-4 border border-2 w-75 border-success rounded-2">
         <h1 class="text-center ">Smart Login System</h1>
         <input type="text" id="userName" placeholder="Enter Your Name" class="form-control my-3">
-        <p id="massageNameCorrect" class="d-none text-success">success Name</p>
-        <p id="massageNameIncorrect" class="d-none text-success">account</p>
-        <input type="text" id="emailName" placeholder="Enter Your Email Name" class="form-control my-3">
+        <p id="msgNameUp" class="text-danger"></p>
+        <input type="email" id="emailName" placeholder="Enter Your Email Name" class="form-control my-3">
+        <p id="msgEmailUp" class="text-danger"></p>
+        <input type="number" id="phoneNumber" placeholder="Enter Your Phone Number" class="form-control my-3">
+        <p id="msgPhoneUp" class="text-danger"></p>
         <input type="password" id="emailPassword" placeholder="Enter Your Password" minlength="4" maxlength="10" class="form-control my-3">
-        <p id="messageCorrectUp" class="d-none text-success">success Email</p>
-        <p id="messageIncorrectUp" class="d-none text-danger">account</p>
-        <button  id="regBtn" onclick=" Registration ()" class="btn btn-outline-success w-50 m-auto d-block my-4 ">Registration</button>
-        <p class="text-center" >Don’t have an account?  <a href="Sign-in.html" class="linkSign" id="linkSign"> Sign in</a></p>
+        <p id="msgPassUp" class="text-danger "></p>
+        <input type="password" id="emailPasswordConfirm" placeholder="Enter Your Password Again" minlength="4" maxlength="10" class="form-control my-3">
+        <p id="msgPassConfirm" class="text-danger "></p>
+        <button  id="regBtn"  class="btn btn-outline-success w-50 m-auto d-block my-4 ">Registration</button>
+        <p class="text-center" >Don’t have an account?  <a href="index.html" class="linkSign" id="linkSign"> Sign in</a></p>
       </div>
     </div>
-
     <script src="JS/bootstrap.bundle.min.js"></script>
     <script src="JS/main.js"  ></script>
   </body>

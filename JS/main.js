@@ -1,18 +1,44 @@
-// sign up in form =========================================
+//todo home page =========================================
+let textHome = document.getElementById( "textHome" );
+let sendEmail = document.getElementById( "sendEmail" );
+
+//todo sign in to form =========================================
+let emailNameIn = document.getElementById( "emailNameIn" );
+let msgEmailIn = document.getElementById( "msgEmailIn" );
+
+let emailPasswordIn = document.getElementById( "emailPasswordIn" );
+let msgPassIn = document.getElementById( "msgPassIn" );
+
+let Login = document.getElementById( "Login" );
+
+
+// //todo sign up in form =========================================
 let userName = document.getElementById( "userName" );
+let msgNameUp = document.getElementById( "msgNameUp" );
+
 let emailName = document.getElementById( "emailName" );
+let msgEmailUp = document.getElementById( "msgEmailUp" );
+
+let phoneNumber = document.getElementById( "phoneNumber" );
+let msgPhoneUp = document.getElementById( "msgPhoneUp" );
+
 let emailPassword = document.getElementById( "emailPassword" );
-let messageCorrectUp = document.getElementById( "messageCorrectUp" );
-let messageIncorrectUp = document.getElementById( "messageIncorrectUp" );
-let massageName = document.getElementById( "massageName" );
-let RegistrationBtn = document.getElementById( "regBtn" );
+let msgPassUp = document.getElementById( "msgPassUp" );
+
+let emailPasswordConfirm = document.getElementById( "emailPasswordConfirm" );
+let msgPassConfirm = document.getElementById( "msgPassConfirm" );
+
+let RegBtn = document.getElementById( "regBtn" );
+
+
 let userArray = [];
+let currentName;
+let currentEmail;
 
-
-
-if (localStorage.getItem("emails") != null)
+//Todo : Get Data in LocalStorage .
+if (localStorage.getItem("users") != null)
 {
-  userArray = JSON.parse(localStorage.getItem( "emails" ));
+  userArray = JSON.parse(localStorage.getItem( "users" ));
 } else
 {
   alert("Local Storage is Empty")
@@ -20,160 +46,287 @@ if (localStorage.getItem("emails") != null)
 
 
 
-
-
-// sign up in form ========================================
-function Registration ()
+//Todo : Function Create User by registration ==> SignUp Page:
+if ( RegBtn !== null )
 {
-  let checkResult = validation();
-  if (checkResult === true)
+  RegBtn.addEventListener( "click", function ()
   {
-    let newUser = {
-      name: userName.value,
-      email: emailName.value,
-      password: emailPassword.value
+
+    let nameValid = false;
+    let emailValid = false;
+    let phoneNum = false;
+    let passValid = false;
+    let passConfirmValid = false;
+    
+    if (NotExistingEmail() !== true)
+    {
+      if (validationName() === true)
+      {
+        nameValid = true;
+        userName.style.cssText = "border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);"
+        clearMsg(msgNameUp)
+      } else
+      {
+        displayMsg( msgNameUp, "Not name Valid" );
+        userName.style.cssText = "border-color: #ff0000 !important; box-shadow: 0 0 0 0.25rem rgba(255,0,0,.25) !important; "
+      }
+    
+      if (validationEmail() === true)
+      {
+        emailValid = true;
+        emailName.style.cssText = "border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);"
+        clearMsg(msgEmailUp)
+      } else
+      {
+        displayMsg( msgEmailUp, "Not Email Valid" );
+        emailName.style.cssText = "border-color: #ff0000 !important; box-shadow: 0 0 0 0.25rem rgba(255,0,0,.25) !important; "
+      }
+
+      if (validationPhoneNumber () === true)
+      {
+        phoneNum = true;
+        phoneNumber.style.cssText = "border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);"
+        clearMsg(msgPhoneUp)
+      } else
+      {
+        displayMsg( msgPhoneUp, "The Phone Number is Incorrect" );
+        phoneNumber.style.cssText = "border-color: #ff0000 !important; box-shadow: 0 0 0 0.25rem rgba(255,0,0,.25) !important; "
+      }
+      
+      
+      if (validationPassword() === true)
+      {
+        passValid = true;
+        emailPassword.style.cssText = "border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);"
+        clearMsg(msgPassUp)
+      } else
+      {
+        displayMsg( msgPassUp, "Not Password Valid" );
+        emailPassword.style.cssText = "border-color: #ff0000 !important; box-shadow: 0 0 0 0.25rem rgba(255,0,0,.25) !important; "
+      }
+      
+      
+      if (validationPasswordConfirmed() === true)
+      {
+        passConfirmValid = true;
+        emailPasswordConfirm.style.cssText = "border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);"
+        clearMsg(msgPassConfirm)
+      } else
+      {
+        displayMsg( msgPassConfirm, "The Password is Incorrect" );
+        emailPasswordConfirm.style.cssText = "border-color: #ff0000 !important; box-shadow: 0 0 0 0.25rem rgba(255,0,0,.25) !important; "
+      }
+      
+
+      if ( nameValid && emailValid  && phoneNum && passValid && passConfirmValid )
+      {
+        userName.style.cssText = "border: var(--bs-border-width) solid var(--bs-border-color); box-shadow: 0 0 0 0 transparent;"
+        emailName.style.cssText = "border: var(--bs-border-width) solid var(--bs-border-color); box-shadow: 0 0 0 0 transparent;"
+        phoneNumber.style.cssText = "border: var(--bs-border-width) solid var(--bs-border-color); box-shadow: 0 0 0 0 transparent;"
+        emailPassword.style.cssText = "border: var(--bs-border-width) solid var(--bs-border-color); box-shadow: 0 0 0 0 transparent;"
+        emailPasswordConfirm.style.cssText = "border: var(--bs-border-width) solid var(--bs-border-color); box-shadow: 0 0 0 0 transparent;"
+        createUser()
+        alert("The registration is Correct ")
+      }
+    } else
+    {
+      displayMsg( msgEmailUp, "The Email is Repeated" )
     }
-    userArray.push( newUser );
-    localStorage.setItem( "emails" , JSON.stringify(userArray))
-    clearFormInput (userName , emailName , emailPassword)
-  } else
-  {
-    alert( checkResult );
-  }
-} 
+    
+    // if ( NotExistingEmail() !== true )
+    // {
+    //   if ( validationName() !== true )
+    //   {
+    //     displayMsg( msgNameUp, "not name Valid" )
+    //     clearMsg( msgNameUp)
+    //   } else if ( validationEmail() !== true )
+    //   {
+    //     displayMsg( msgEmailUp, "not Email Valid" )
+    //     clearMsg( msgEmailUp)
+    //   } else if ( validationPassword() !== true )
+    //   {
+    //     displayMsg( msgPassUp, "not Password Valid" )
+    //     clearMsg( msgPassUp)
+    //   } else
+    //   {
+    //     createUser()
+    //   }
+    // } else
+    // {
+    //   displayMsg( msgEmailUp, "Repeated Email" )
+    //   clearMsg( msgEmailUp );
+    // }
+  } )
+}
 
 
-// Validation the Input Data for registration :
-function validation ()
+//Todo : Function do Login success ==> SignIn Page:
+if ( Login !== null )
 {
-  let regexName = /^[A-Z][a-z]{2,15} [A-Z][a-z]{2,15}$/;
-  let regexEmail = /^[A_Za-z-\d_\.]{4,20}@(gmail|yahoo|outlook|hotmail)\.[A-Za-z]{2,5}$/i;
-  let regexPassword = /^.{4,10}$/;
+  Login.addEventListener( "click", function ()
+  {
+    if ( checkEmail() )
+    {
+      window.open( "home.html", "_self" );
+      // currentName = JSON.parse( localStorage.getItem( "currentName" ) )
+      // currentEmail = JSON.parse( localStorage.getItem( "currentName" ) )
+      console.log("gooood");
+      // clearFormInput (emailNameIn , emailPasswordIn)
+    }
+  })
+}
 
-  if (regexName.test(userName.value) !== true)
-  {
-    return "Not valid Name";
-  }
-  
-  else if ( regexEmail.test( emailName.value ) !== true )
-  {
-    return "Not valid Email";
-  }
-  
-  else if ( regexPassword.test( emailPassword.value ) !== true )
-  {
-    return "Not valid Password";
-  }
-  return true
+
+//Todo : Function display user name in the home page when email is validated ==> Home Page:
+if (textHome !== null) {
+  currentName = JSON.parse(localStorage.getItem("currentName"));
+  displayMsg(textHome ,`Welcome :  ${currentName}`
+  );
 }
 
 
 
 
-// RegistrationBtn.addEventListener("click" , function ()
-// {
-//   let checkResult = validation();
-//   if (checkResult === true)
-//   {
-//     let newUser = {
-//       name: userName.value,
-//       email: emailName.value,
-//       password: emailPassword.value
-//     }
-//     userArray.push( newUser );
-//     localStorage.setItem( "emails" , JSON.stringify(userArray))
-//     clearFormInput()
-//     console.log(userArray);
-//   } else
-//   {
-//     alert( checkResult );
-//   }
-// })
+//Todo Function Create User and Save data In Array Of Object by registration :
+function createUser ()
+{
+let newUser = {
+  name: userName.value,
+  email: emailName.value,
+  phone: phoneNumber.value,
+  password: emailPassword.value
+}
+userArray.push( newUser );
+localStorage.setItem( "users", JSON.stringify( userArray ) )
+clearFormInput (userName , emailName , phoneNumber , emailPassword , emailPasswordConfirm)
+}
 
 
+//Todo Function Validation Name the Input Data for registration :
+function validationName ()
+{
+  let regexName = /^[A-Z][a-z]{2,15} [A-Z][a-z]{2,15}$/;
+  if (regexName.test(userName.value) === true)
+  {
+    return true;
+    // return "Not valid Name";
+  }
+}
 
-function clearFormInput (name , email , password)
+
+//Todo Function Validation Email the Input Data for registration :
+function validationEmail ()
+{
+  let regexEmail = /^[A_Za-z-\d_\.]{4,20}@(gmail|yahoo|outlook|hotmail)\.[A-Za-z]{2,5}$/i;
+  if ( regexEmail.test( emailName.value ) === true )
+  {
+    return true;
+    // return "Not valid Email";
+  }
+}
+
+
+//Todo Function Validation Phone Number the Input Data for registration :
+function validationPhoneNumber ()
+{
+  let regexEmail = /^(002)?01[0125][0-9]{8}$/i;
+  if ( regexEmail.test( phoneNumber.value ) === true  )
+  {
+    return true;
+    // return "Not valid Email";
+  }
+}
+
+
+//Todo Function Validation Password the Input Data for registration :
+function validationPassword()
+{
+  let regexPassword = /^.{4,10}$/;
+  if ( regexPassword.test( emailPassword.value ) === true )
+  {
+    return true;
+    // return "Not valid Password";
+  }
+}
+
+
+//Todo Function Validation Password Confirmed the Input Data for registration :
+function validationPasswordConfirmed()
+{
+  if ( emailPassword.value === emailPasswordConfirm.value )
+  {
+    return true;
+    // return "Not valid Password Confirmed";
+  }
+}
+
+
+//Todo Function clear the Input Data in form :
+function clearFormInput (name , email , phone , password , passConfirm)
 {
   name.value = "";
   email.value = "";
+  phone.value = "";
   password.value = "";
+  passConfirm.value = "";
 }
 
 
-
-
-// sign in to form =========================================
-let emailNameIn = document.getElementById( "emailNameIn" );
-let emailPasswordIn = document.getElementById( "emailPasswordIn" );
-let Login = document.getElementById( "Login" );
-let layerDiv = document.getElementById( "layer" );
-
-
-
-function checkedInput ()
+//Todo Function Display the Message Error in page :
+function displayMsg (element , message)
 {
-    let flag = false;
-    for ( let i = 0; i < userArray.length; i++ )
-    {
-      if ((userArray[i].email === emailNameIn.value) &&  (userArray[i].password === emailPasswordIn.value))
-      {
-        flag = true;
-        userNameShowDiv = userArray[ i ].name;
-      }
-    }
-    
-    if (flag === true)
-    {
-      clearFormInput ( name , emailNameIn , emailPasswordIn)
-      window.open( "home.html" );
-    }
-    else
-    {
-      layerDiv.classList.remove("d-none")
-    }
+  element.innerHTML = message;
 }
 
 
-
-// function checkedInput ()
-// {
-//   let textHome = document.getElementById( "textHome" );
-//   let arrayName = [];
-//   let arrayEmail = [];
-//   let arrayPass = [];
-
-//   for ( let i = 0; i < userArray.length; i++ )
-//     {
-//       arrayName.push (userArray[i].name)
-//       arrayEmail.push (userArray[i].email)
-//       arrayPass.push (userArray[i].password)
-//     }
-
-//   if (arrayEmail.indexOf(emailNameIn.value)  === -1  )
-//     {
-//       alert("Email in corrected")
-//     } else if (arrayPass.indexOf(emailPasswordIn.value)  === -1)
-//     {
-//       alert("password in corrected")
-//     } else
-//   {
-//     window.open( "home.html" );
-//     clearFormLogIn ()
-
-//     // let UserNameHome = `<span> Hello : ${ arrayName[ arrayName[ arrayEmail.indexOf( emailNameIn.value ) ] ] } </span>`;
-//     // document.getElementById("textHome").innerHTML = UserNameHome
-//   }
-  
-// }
-
-
-layerDiv.addEventListener( "click", function (e)
+//Todo Function Display the Message Error in page :
+function clearMsg (element)
 {
-  if (e.target.id === "layer")
+  element.innerHTML = "";
+}
+
+
+//Todo Function do prevents user from creating duplicate accounts
+function NotExistingEmail ()
+{
+  for ( let i = 0; i < userArray.length; i++)
   {
-  this.classList.add("d-none")
+    if (emailName.value === userArray[ i ].email)
+    {
+      return true;
+    }
   }
-} )
+}
 
 
+//Todo Function check Function the Email and Password in Array :
+function checkEmail ()
+{
+  let flagEmail = false;
+  let flagPassword = false;
+  
+  for ( let i = 0; i < userArray.length; i++ )
+  {
+    console.log( userArray[ i ] );
+    if ( userArray[ i ].email === emailNameIn.value )
+    {
+      flagEmail = true;
+      clearMsg( msgEmailIn )
+    } else { displayMsg( msgEmailIn, "Email incorrect" ) };
+    
+    if ( userArray[ i ].password === emailPasswordIn.value )
+    {
+      flagPassword = true;
+      clearMsg( msgPassIn )
+    } else { displayMsg( msgPassIn, "Password incorrect" ) };
 
+    if ( flagEmail && flagPassword )
+    {
+      currentName = userArray[ i ].name;
+      currentEmail = userArray[ i ].email;
+      localStorage.setItem("currentName" ,JSON.stringify(currentName) )
+      localStorage.setItem("currentEmail" ,JSON.stringify(currentEmail) )
+      return true;
+    }
+  }
+}
