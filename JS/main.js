@@ -45,7 +45,6 @@ if (localStorage.getItem("users") != null)
 }
 
 
-
 //Todo : Function Create User by registration ==> SignUp Page:
 if ( RegBtn !== null )
 {
@@ -157,6 +156,46 @@ if ( RegBtn !== null )
     //   clearMsg( msgEmailUp );
     // }
   } )
+
+  //Todo : Function display password  in The Form Password Input :
+  document.getElementById( "show" ).addEventListener( "click", function ()
+  {
+    this.classList.add("d-none")
+    document.getElementById( "hide" ).classList.remove( "d-none" )
+    emailPassword.type = "password";
+    console.log("show");
+  } )
+
+  //Todo : Function display password  in The Form Confirmed Password Input :
+  document.getElementById( "showConfirm" ).addEventListener( "click", function ()
+  {
+    this.classList.add("d-none")
+    document.getElementById( "hideConfirm" ).classList.remove( "d-none" )
+    emailPasswordConfirm.type = "password";
+    console.log("show");
+  } )
+
+
+  //Todo : Function Show password  in The Form Password Input :
+  document.getElementById( "hide" ).addEventListener( "click", function ()
+  {
+    this.classList.add("d-none")
+    document.getElementById( "show" ).classList.remove( "d-none" )
+    emailPassword.type = "text";
+    console.log("hide");
+  } )
+
+  //Todo : Function Show password  in The Form Confirmed Password Input :
+  document.getElementById( "hideConfirm" ).addEventListener( "click", function ()
+  {
+    this.classList.add("d-none")
+    document.getElementById( "showConfirm" ).classList.remove( "d-none" )
+    emailPasswordConfirm.type = "text";
+    console.log("hide");
+  } )
+  
+
+
 }
 
 
@@ -173,7 +212,29 @@ if ( Login !== null )
       console.log("gooood");
       // clearFormInput (emailNameIn , emailPasswordIn)
     }
-  })
+  } )
+  
+
+
+    //Todo : Function display password  in The Form Password Input to Login :
+    document.getElementById( "showLogin" ).addEventListener( "click", function ()
+    {
+      this.classList.add("d-none")
+      document.getElementById( "hideLogin" ).classList.remove( "d-none" )
+      emailPasswordIn.type = "password";
+      console.log("show");
+    } )
+  
+  
+  
+    //Todo : Function Show password  in The Form Password Input to Login :
+    document.getElementById( "hideLogin" ).addEventListener( "click", function ()
+    {
+      this.classList.add("d-none")
+      document.getElementById( "showLogin" ).classList.remove( "d-none" )
+      emailPasswordIn.type = "text";
+      console.log("hide");
+    } )
 }
 
 
@@ -183,7 +244,6 @@ if (textHome !== null) {
   displayMsg(textHome ,`Welcome :  ${currentName}`
   );
 }
-
 
 
 
@@ -330,3 +390,15 @@ function checkEmail ()
     }
   }
 }
+
+
+
+
+
+
+//   function showPassword(element)
+// {
+//   this.classList.add("d-none")
+//   element.classList.remove("d-none")
+//   console.log("show");
+// } 

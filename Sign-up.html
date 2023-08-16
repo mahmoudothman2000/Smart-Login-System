@@ -34,9 +34,17 @@
         <p id="msgEmailUp" class="text-danger"></p>
         <input type="number" id="phoneNumber" placeholder="Enter Your Phone Number" class="form-control my-3">
         <p id="msgPhoneUp" class="text-danger"></p>
-        <input type="password" id="emailPassword" placeholder="Enter Your Password" minlength="4" maxlength="10" class="form-control my-3">
+        <div class="pass position-relative">
+          <input type="password" id="emailPassword" placeholder="Enter Your Password" minlength="4" maxlength="10" class="form-control my-3">
+          <i id="show" class="fa-regular d-none fa-eye position-absolute"></i>
+          <i id="hide" class="fa-regular fa-eye-slash position-absolute"></i>
+        </div>
         <p id="msgPassUp" class="text-danger "></p>
-        <input type="password" id="emailPasswordConfirm" placeholder="Enter Your Password Again" minlength="4" maxlength="10" class="form-control my-3">
+        <div class="pass position-relative">
+          <input type="password" id="emailPasswordConfirm" placeholder="Enter Your Password Again" minlength="4" maxlength="10" class="form-control my-3">
+          <i id="showConfirm" class="fa-regular d-none fa-eye position-absolute"></i>
+          <i id="hideConfirm" class="fa-regular fa-eye-slash position-absolute"></i>
+        </div>
         <p id="msgPassConfirm" class="text-danger "></p>
         <button  id="regBtn"  class="btn btn-outline-success w-50 m-auto d-block my-4 ">Registration</button>
         <p class="text-center" >Don’t have an account?  <a href="index.html" class="linkSign" id="linkSign"> Sign in</a></p>

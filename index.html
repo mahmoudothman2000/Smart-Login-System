@@ -30,7 +30,11 @@
         <h1 class="text-center ">Smart Login System</h1>
         <input type="text" id="emailNameIn" placeholder="Enter Your Email Name" class="form-control my-3">
         <p id="msgEmailIn" class="text-danger"></p>
-        <input type="password" id="emailPasswordIn" placeholder="Enter Your Password" class="form-control my-3">
+        <div class="pass position-relative">
+          <input type="password" id="emailPasswordIn" placeholder="Enter Your Password" class="form-control my-3">
+          <i id="showLogin" class="fa-regular d-none fa-eye position-absolute"></i>
+          <i id="hideLogin" class="fa-regular fa-eye-slash position-absolute"></i>
+        </div>
         <p id="msgPassIn" class="text-danger"></p>
         <button id="Login"  class="btn btn-outline-primary w-50 m-auto d-block my-4 ">Login</button>
         <p class="text-center">Don’t have an account?  <a href="Sign-up.html" class="linkSign" id="linkSign"> Sign Up</a></p>
