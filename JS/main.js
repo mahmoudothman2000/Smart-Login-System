@@ -362,25 +362,23 @@ function NotExistingEmail ()
 //Todo Function check Function the Email and Password in Array :
 function checkEmail ()
 {
-  let flagEmail = false;
-  let flagPassword = false;
+
+  let flag = false;
   
   for ( let i = 0; i < userArray.length; i++ )
   {
-    console.log( userArray[ i ] );
-    if ( userArray[ i ].email === emailNameIn.value )
+    if ( userArray[ i ].email === emailNameIn.value &&  userArray[ i ].password === emailPasswordIn.value)
     {
-      flagEmail = true;
+      flag = true;
       clearMsg( msgEmailIn )
-    } else { displayMsg( msgEmailIn, "Email incorrect" ) };
-    
-    if ( userArray[ i ].password === emailPasswordIn.value )
-    {
-      flagPassword = true;
       clearMsg( msgPassIn )
-    } else { displayMsg( msgPassIn, "Password incorrect" ) };
-
-    if ( flagEmail && flagPassword )
+    } else if(userArray[ i ].email !== emailNameIn.value &&  userArray[ i ].password === emailPasswordIn.value){
+      displayMsg( msgEmailIn, "Email incorrect" )
+    } else if(userArray[ i ].email === emailNameIn.value &&  userArray[ i ].password !== emailPasswordIn.value){
+      displayMsg( msgPassIn, "Password incorrect" ) 
+    }
+    
+    if ( flag )
     {
       currentName = userArray[ i ].name;
       currentEmail = userArray[ i ].email;
